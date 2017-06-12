@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+const AddPuncutation = ({ style, text, punctuation }) => <span style={style}>{text}{punctuation}</span>
+
+const Emphasize = ({ times, children }) => {
+  return React.cloneElement(children, {
+    style: { fontWeight: "bold" },
+    punctuation: children.props.punctuation.repeat(times),
+  })
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Emphasize times={10}>
+          <AddPuncutation
+            text="Hello World"
+            punctuation="!"
+          />
+        </Emphasize>
       </div>
     );
   }
